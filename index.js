@@ -77,6 +77,7 @@ const crawler = async () => {
   console.log('Trade History page: https://bitflyer.com/ja-jp/ex/TradeHistory');
 
    await page.waitForSelector('#menu');
+   console.log('find trade page content')
   
   // DL button click
   await page.click('#MainContent_DownloadReportButton')
