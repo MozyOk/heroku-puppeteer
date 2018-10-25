@@ -76,7 +76,7 @@ const crawler = async () => {
   await page.goto('https://bitflyer.com/ja-jp/ex/TradeHistory');
   console.log('Trade History page: https://bitflyer.com/ja-jp/ex/TradeHistory');
 
-  //await page.waitForNavigation({timeout: 60000, waitUntil: 'networkidle2'});
+   await page.waitForSelector('#menu');
   
   // DL button click
   await page.click('#MainContent_DownloadReportButton')
