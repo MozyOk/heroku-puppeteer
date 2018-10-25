@@ -70,8 +70,7 @@ const crawler = async () => {
 
   console.log('maybe home');
 
-  await page.waitForNavigation({timeout: 600000, waitUntil: "domcontentloaded"});
-  
+  //await page.waitForNavigation({timeout: 600000, waitUntil: "domcontentloaded"});
 
   // goto tradehistory
   await page.goto('https://bitflyer.com/ja-jp/ex/TradeHistory');
