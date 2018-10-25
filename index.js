@@ -49,16 +49,16 @@ const crawler = async () => {
   
   await page.goto('https://bitflyer.com/ja-jp/login')
   await page.waitForSelector('#loginForm');
-  console.log('page goto');
+  console.log('login page: https://bitflyer.com/ja-jp/login');
 
   // user pass
   await page.type('input[name="ctl00$MainContent$email"]', USER_ID);
   await page.type('input[name="ctl00$MainContent$password"]', PASSWORD);
-  console.log('ID/pass typed');
+  console.log('ID/Pass typed');
 
   // login
   await page.click('input[name="ctl00$MainContent$Button1"]');
-  console.log('login!');
+  console.log('Login!');
   // await page.screenshot({path: 'tmp/login.png', fullPage: true});
 
   // 2factor auth
@@ -68,17 +68,18 @@ const crawler = async () => {
   //await page.waitForNavigation({timeout: 60000, waitUntil: "domcontentloaded"});
   //await page.screenshot({path: 'tmp/home.png', fullPage: true});
 
-  console.log('maybe home');
+  console.log('Home page');
 
   await page.waitForNavigation({timeout: 60000, waitUntil: 'networkidle2'});
 
   // goto tradehistory
   await page.goto('https://bitflyer.com/ja-jp/ex/TradeHistory');
-  console.log('Trade page');
+  console.log('Trade History page: https://bitflyer.com/ja-jp/ex/TradeHistory');
   
   // DL button click
   await page.click('#MainContent_DownloadReportButton')
   console.log('DL clicked');
 
-  //await browser.close();
+  console.log('good bye!');
+  await browser.close();
 }
