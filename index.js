@@ -35,8 +35,7 @@ const pc = {
 };
 
 // Heroku setting
-const LAUNCH_OPTION = process.env.DYNO ? { args: ['--no-sandbox', '--disable-setuid-sandbox'] }
-      : { headless: true, slowMo: 10, downloadPath: './tmp' };
+const LAUNCH_OPTION = process.env.DYNO ? { args: ['--no-sandbox', '--disable-setuid-sandbox'] } : { headless: true, slowMo: 10, downloadPath: './tmp' };
 
 const crawler = async () => {
   const browser = await puppeteer.launch(LAUNCH_OPTION); // Launch Option
@@ -45,7 +44,7 @@ const crawler = async () => {
 
   await page._client.send(
     'Page.setDownloadBehavior',
-    {behavior : 'allow', downloadPath: downloadPath}
+    {behavior : 'allow', downloadPath: './tmp'}
   );
   
   await page.goto('https://bitflyer.com/ja-jp/login')
