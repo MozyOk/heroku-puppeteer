@@ -39,7 +39,7 @@ const LAUNCH_OPTION = process.env.DYNO ? { args: ['--no-sandbox', '--disable-set
       : { headless: true, slowMo: 10, downloadPath: './tmp' };
 
 const crawler = async () => {
-  const browser = await puppeteer.launch(LAUNCH_OPTION); // Launch Optionの追加
+  const browser = await puppeteer.launch(LAUNCH_OPTION); // Launch Option
   const page = await browser.newPage();
   await page.emulate(pc);
 
