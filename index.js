@@ -35,7 +35,7 @@ const pc = {
 };
 
 // Heroku setting
-const LAUNCH_OPTION = process.env.DYNO ? { args: ['--no-sandbox', '--disable-setuid-sandbox'] } : { headless: true, slowMo: 10, downloadPath: './tmp' };
+const LAUNCH_OPTION = process.env.DYNO ? { args: ['--no-sandbox', '--disable-setuid-sandbox'] } : { headless: false, slowMo: 10, downloadPath: './tmp' };
 
 const crawler = async () => {
   const browser = await puppeteer.launch(LAUNCH_OPTION); // Launch Option
@@ -76,8 +76,8 @@ const crawler = async () => {
   await page.goto('https://bitflyer.com/ja-jp/ex/TradeHistory');
   console.log('Trade History page: https://bitflyer.com/ja-jp/ex/TradeHistory');
 
-   await page.waitForSelector('#menu');
-   console.log('find trade page content')
+  await page.waitForSelector('#menu');
+  console.log('find trade page content')
   
   // DL button click
   await page.click('#MainContent_DownloadReportButton')
