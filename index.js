@@ -1,6 +1,7 @@
 const Koa = require('koa');
 const Router = require('koa-router');
 const bodyParser = require('koa-bodyparser');
+const readlineSync = require('readline-sync');
 
 const app = new Koa();
 const router = new Router();
@@ -35,7 +36,7 @@ const pc = {
 };
 
 // Heroku setting
-const LAUNCH_OPTION = process.env.DYNO ? { args: ['--no-sandbox', '--disable-setuid-sandbox'] } : { headless: false, slowMo: 10, downloadPath: './tmp' };
+const LAUNCH_OPTION = process.env.DYNO ? { args: ['--no-sandbox', '--disable-setuid-sandbox'] } : { headless: true, slowMo: 50, downloadPath: './tmp' };
 
 const crawler = async () => {
   const browser = await puppeteer.launch(LAUNCH_OPTION); // Launch Option
@@ -62,17 +63,22 @@ const crawler = async () => {
   // await page.screenshot({path: 'tmp/login.png', fullPage: true});
 
   // 2factor auth
-  // await page.click('input[name="ctl00$MainContent$ctl00"]');
+  await page.click('input[name="ctl00$MainContent$ctl00"]');
+  var code = readlineSync.question('Please Type 2 Factor Auth Code: ', {
+    hideEchoBack: true
+  });
+  await page.type('input[name="ctl00$MainContent$otpCode"]', code);
+  await page.click('input[name="ctl00$MainContent$ctl01"]');
 
   // Home check
-  //await page.waitForNavigation({timeout: 60000, waitUntil: "domcontentloaded"});
-  //await page.screenshot({path: 'tmp/home.png', fullPage: true});
+  await page.waitForNavigation({timeout: 60000, waitUntil: "domcontentloaded"});
+  // await page.screenshot({path: 'tmp/home.png', fullPage: true});
 
   console.log('Home page');
 
-  await page.waitForNavigation({timeout: 60000, waitUntil: 'networkidle2'});
+  // await page.waitForNavigation({timeout: 60000, waitUntil: 'networkidle2'});
 
-  // goto tradehistory
+  // goto trade history
   await page.goto('https://bitflyer.com/ja-jp/ex/TradeHistory');
   console.log('Trade History page: https://bitflyer.com/ja-jp/ex/TradeHistory');
 
